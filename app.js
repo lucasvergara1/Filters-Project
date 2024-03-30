@@ -19,7 +19,20 @@ productsContainer.innerHTML = filteredProducts.map(({id, title, image, price})=>
 
   </article>`;
 }).join('');
-
-}
+};
 
 displayProducts();
+
+//Text Filter 
+
+const form = document.querySelector('.input-form')
+const searchInput = document.querySelector('.search-input')
+
+form.addEventListener('keyup', () => {
+  const inputValue = searchInput.value;
+  filteredProducts = products.filter((banana)=>{
+    return banana.title.toLowerCase().includes(inputValue);
+  });
+  displayProducts()
+
+});
