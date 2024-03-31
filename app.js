@@ -50,10 +50,26 @@ const companiesDOM = document.querySelector('.companies')
 
 const displayButtons = () =>{
   const buttons = ['all',
-  ...new Set(products.map((product)=>product.company))];
+  ...new Set(products.map((product)=>product.company)),];
 companiesDOM.innerHTML = buttons.map((company)=>{
   return `<button class="company-btn" data-id="${company}">${company}</button>`;
-}).join('')
+}).join('');
 };
 
 displayButtons();
+
+companiesDOM.addEventListener('click', (e) =>{
+  const el = e.target;
+  if (el.classList.contains('company-btn')){
+    if(el.dataset.id === 'all') {
+filteredProducts = [...products];
+    }else{
+      filteredProducts = products.filter((product)=>{
+        return product.company === el.dataset.id;
+      });
+    }
+    searchInput.value = '';
+    displayProducts();
+  }
+
+})
